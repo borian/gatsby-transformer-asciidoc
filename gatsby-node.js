@@ -71,7 +71,7 @@ async function onCreateNode(
       };
     }
 
-    let pageAttributes = extractPageAttributes(doc.getAttributes());
+    const attributes = extractPageAttributes(doc.getAttributes());
 
     const asciiNode = {
       id: createNodeId(`${node.id} >>> ASCIIDOC`),
@@ -89,7 +89,7 @@ async function onCreateNode(
       },
       revision,
       author,
-      pageAttributes
+      attributes,
     };
 
     asciiNode.internal.contentDigest = createContentDigest(asciiNode);
@@ -129,8 +129,8 @@ const withPathPrefix = (pathPrefix, url) =>
 
 const extractPageAttributes = allAttributes =>
   Object.entries(allAttributes).reduce((pageAttributes, [key, value]) => {
-    if (key.startsWith(`page-`)) {
-      pageAttributes[key.replace(/^page-/, ``)] = value;
+    if (key.startsWith(`page-`) || key.startsWith(`post-`) ) {
+      pageAttributes[key.replace(/^(page-|post-)/, ``)] = value;
     }
     return pageAttributes;
   }, {});

@@ -1,5 +1,11 @@
 # gatsby-transformer-asciidoc
 
+Fork from [gatsbyjs/gatsby](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-transformer-asciidoc)
+
+Added:
+
+* post prefix, renamed attributes name
+
 Parses AsciiDoc files using [Asciidoctor.js](https://asciidoctor.org/docs/asciidoctor.js/).
 
 ## Install
@@ -136,14 +142,14 @@ Firstname Lastname <author@example.org>
 
 ```
 
-Each attribute with the prefix page- will be automatically added under `pageAttributes` so it can be used with GraphQL.
+Each attribute with the prefix page- will be automatically added under `attributes` so it can be used with GraphQL.
 
 ```graphql
 {
   allAsciidoc {
     edges {
       node {
-        pageAttributes {
+        attributes {
           title
           path
           category
